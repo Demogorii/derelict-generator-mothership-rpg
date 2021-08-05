@@ -11,9 +11,7 @@ export default function Model(props) {
   const group = useRef();
   const { nodes, materials } = useGLTF("/model.glb");
 
-  const { setSelectedText, setSelectedLabel, lightMode } = useStore(
-    (state) => state
-  );
+  const { lightMode } = useStore((state) => state);
 
   const material = useMemo(
     () =>
