@@ -9,7 +9,7 @@ import { useStore } from "../store";
 
 export default function Model(props) {
   const group = useRef();
-  const { nodes, materials } = useGLTF("/sala.glb");
+  const { nodes, materials } = useGLTF("/model.glb");
 
   const { setSelectedText, setSelectedLabel, lightMode } = useStore(
     (state) => state
@@ -105,4 +105,4 @@ export default function Model(props) {
   );
 }
 
-useGLTF.preload("/sala.glb");
+useGLTF.preload("/model.glb");
