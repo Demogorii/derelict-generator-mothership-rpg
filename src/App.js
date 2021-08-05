@@ -1,8 +1,8 @@
 import { ShipGenerator } from "./utils/ship-generator";
 import { Chance } from "chance";
-import { MapControls, Stats, Stars, Loader, Text } from "@react-three/drei";
+import { MapControls, Stars, Loader, Text } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { Suspense, useState, useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { Spaceship } from "./components/spaceship";
 import { EffectComposer, Noise, Vignette } from "@react-three/postprocessing";
 import { useStore } from "./store";
