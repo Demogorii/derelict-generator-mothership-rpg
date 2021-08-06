@@ -9,7 +9,7 @@ export const Spaceship = (props) => {
   const { lightMode } = useStore((state) => state);
 
   const ref = useRef();
-
+  const [hidden, setHidden] = useState(false);
   const [res, setName] = useState({ name: "", label: "" });
   const [rand, setRand] = useState(false);
 
@@ -24,17 +24,18 @@ export const Spaceship = (props) => {
     }
   };
 
-  const check =
-    res.name === "CARGO HOLD" && res.label.includes("Contains") && rand < 0.2;
+  const check = () => {
+    setHidden(!hidden);
+  };
 
   return (
-    <group {...props} ref={ref}>
+    <group {...props}>
       <DerelictRoom
         color={props.color}
         walls={props.walls}
         exits={props.exits}
         text={res.name}
-        hidden={check}
+        onCheck={check}
         label={res.label}
       />
       <Text
@@ -52,7 +53,7 @@ export const Spaceship = (props) => {
       >
         {res.name}
       </Text>
-      {check && (
+      {hidden && (
         <Text
           color={"red"}
           fontSize={0.3}
@@ -71,12 +72,12 @@ export const Spaceship = (props) => {
       )}
       <Text
         color={!lightMode ? `white` : `#000`}
-        fontSize={0.17}
+        fontSize={0.175}
         lineHeight={1.2}
         maxWidth={1.6}
         letterSpacing={0}
         textAlign={"center"}
-        font="rob1.ttf"
+        font="rad2.ttf"
         rotation={[-Math.PI * 0.5, 0, Math.PI * 0.5]}
         position={[0.3, 0.19, 0]}
       >
