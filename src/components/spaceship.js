@@ -6,7 +6,7 @@ import { useStore } from "../store";
 import { RoomName } from "../utils/rooms-names";
 
 export const Spaceship = (props) => {
-  const { lightMode } = useStore((state) => state);
+  const { lightMode, setTwine } = useStore((state) => state);
 
   const ref = useRef();
   const [hidden, setHidden] = useState(false);
@@ -18,14 +18,50 @@ export const Spaceship = (props) => {
     setRand(Math.random);
   }, []);
 
-  const checkHidden = () => {
-    if (res.name === "CARGO HOLD") {
-      return true;
+  useEffect(() => {
+    if (res.name) {
+      setTwine(
+        `<tw-passagedata pid="${props.roomId}" name="${props.roomId}" tags="${
+          hidden ? "hidden" : ""
+        }" position="${620 + Math.round(props.position[0] * 75)},${
+          320 + Math.round(props.position[2] * 75)
+        }" size="100,100">
+     (text-colour:lime)[''//${res.name}'']
+
+      ${res.label}
+
+      ${props.exits
+        .map((rm) => {
+          return `
+          [[Move to ${direction(rm[1])}-&gt;${rm[2].id}]]\n`;
+        })
+        .join("")}
+    </tw-passagedata>`
+      );
     }
-  };
+  }, [res]);
 
   const check = () => {
     setHidden(!hidden);
+  };
+
+  const direction = (dir) => {
+    let str = "";
+    switch (dir) {
+      case 0:
+        str = "North";
+        break;
+      case 90:
+        str = "East";
+        break;
+      case 180:
+        str = "South";
+        break;
+      case 270:
+        str = "West";
+        break;
+    }
+    return str;
   };
 
   return (

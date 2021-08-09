@@ -8,6 +8,7 @@ import { EffectComposer, Noise, Vignette } from "@react-three/postprocessing";
 import { useStore } from "./store";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
+import { TEMPLATE } from "./utils/template";
 
 function App() {
   const {
@@ -19,6 +20,7 @@ function App() {
     lightMode,
     setShowGrid,
     showGrid,
+    twine,
   } = useStore((state) => state);
 
   useEffect(() => {
@@ -29,7 +31,7 @@ function App() {
   }, []);
 
   const renderShip = () => {
-    return ship.ship.children.map((room) => {
+    return ship.ship.children.map((room, i) => {
       if (room.tag === "initial") {
         room.face = [1];
       } else {
@@ -64,6 +66,7 @@ function App() {
         <group>
           <Spaceship
             color={color}
+            rid={i}
             key={room.id}
             exits={room.exits}
             roomId={room.id}
@@ -247,7 +250,7 @@ function App() {
           onClick={() => {
             const tirada = Chance().rpg("1d100")[0];
             const pecio = ShipGenerator(tirada);
-            console.log(tirada);
+
             setShip(pecio);
           }}
           className={`${
@@ -327,7 +330,7 @@ function App() {
             });
           }}
           className={`${
-            !lightMode ? `bg-lime` : `bg-gray-900`
+            !lightMode ? `bg-cyan` : `bg-gray-900`
           } w-1/3 text-center mt-2 cursor-pointer hover:bg-transparent 
         pointer-events-auto hover:bg-white`}
         >
@@ -339,8 +342,35 @@ function App() {
             Save As PDF
           </p>{" "}
         </div>
+        {/* <div
+          data-html2canvas-ignore="true"
+          onClick={() => {
+            const temp = TEMPLATE(twine);
+          }}
+          className={`${
+            !lightMode ? `bg-cyan` : `bg-gray-900`
+          } w-1/3 text-center mt-2 cursor-pointer hover:bg-transparent 
+        pointer-events-auto hover:bg-white`}
+        >
+          <p
+            className={`font-radjhani font-bold text-xl ${
+              !lightMode ? `text-black` : `text-white hover:text-black`
+            } mb-2`}
+          >
+            Generate TWINE story
+          </p>{" "}
+          </div>*/}
       </div>
-
+      {/*
+const BaseTwine = `
+<tw-storydata name="Test" startnode="1" creator="Twine" creator-version="2.3.14" ifid="42116112-5974-443D-8B30-D529FFBCD2C6" zoom="1" format="Harlowe" format-version="3.2.2" options="" hidden>
+<style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style>
+<script role="script" id="twine-user-script" type="text/twine-javascript"></script>
+  <tw-passagedata pid="1" name="Computer" tags="" position="489.5,300" size="100,100">[[Hola-&gt;Galley]]</tw-passagedata>
+  <tw-passagedata pid="2" name="Galley" tags="" position="682.5,300" size="100,100">Double-click this passage to edit it.</tw-passagedata>
+</tw-storydata>
+`;
+*/}
       <div className="absolute left-8 bottom-8 select-none pointer-events-none w-1/2 ">
         <p className="text-3xl font-teko font-bold tracking-wider text-lime">
           {selectedText}

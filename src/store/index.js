@@ -9,6 +9,10 @@ const useStore = create((set, get) => ({
   lightMode: false,
   showGrid: true,
   showHud: true,
+  twine: [],
+  setTwine: (twine) => {
+    set((state) => (state.twine = [twine, get().twine]));
+  },
   setShowGrid: () => {
     const light = !get().showGrid;
     set({ showGrid: light });
