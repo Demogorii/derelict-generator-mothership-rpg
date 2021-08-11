@@ -26,14 +26,14 @@ export const Spaceship = (props) => {
         }" position="${620 + Math.round(props.position[0] * 75)},${
           320 + Math.round(props.position[2] * 75)
         }" size="100,100">
-     (text-colour:lime)[''//${res.name}'']
+     (text-colour:lime)[''${res.name}'']
 
-      ${res.label}
+     (text-colour:gray)[Room description:] ${res.label}
 
       ${props.exits
         .map((rm) => {
           return `
-          [[Move to ${direction(rm[1])}-&gt;${rm[2].id}]]\n`;
+          [[Go to ${direction(rm[1])}-&gt;${rm[2].id}]] \n`;
         })
         .join("")}
     </tw-passagedata>`
@@ -49,16 +49,16 @@ export const Spaceship = (props) => {
     let str = "";
     switch (dir) {
       case 0:
-        str = "North";
-        break;
-      case 90:
         str = "East";
         break;
-      case 180:
+      case 90:
         str = "South";
         break;
-      case 270:
+      case 180:
         str = "West";
+        break;
+      case 270:
+        str = "North";
         break;
     }
     return str;

@@ -21,6 +21,8 @@ function App() {
     setShowGrid,
     showGrid,
     twine,
+    setHiddeMenu,
+    hiddeMenu,
   } = useStore((state) => state);
 
   useEffect(() => {
@@ -144,233 +146,335 @@ function App() {
         </Suspense>
       </Canvas>
       <Loader />
-      <div className="absolute left-8 top-8 select-none pointer-events-none ">
-        {" "}
-        <p
-          className={`text-8xl font-teko font-bold ${
-            !lightMode ? `text-white` : `text-gray-900`
-          } tracking-wide`}
-        >
-          > {ship && ship.pecio.name.toUpperCase()}
-        </p>
-        <p
-          className={` ${
-            !lightMode ? ` text-lime` : `text-gray-700`
-          } text-5xl font-teko font-bold tracking-wider`}
-        >
-          {ship && ship.pecio.shipTyp.toUpperCase()}
-        </p>
-        <br />
-        <ul className="text-white text-2xl font-radjhani">
-          <li>
-            <span
-              className={`${
-                !lightMode ? `text-white` : `text-black`
-              } uppercase font-bold`}
-            >
-              Status:
-            </span>{" "}
-            <span className={`${!lightMode ? `text-lime` : `text-gray-600`}`}>
-              {ship && ship.pecio.status}
-            </span>
-          </li>
-          <li>
-            <span
-              className={`${
-                !lightMode ? `text-white` : `text-black`
-              } uppercase font-bold`}
-            >
-              Survivors:
-            </span>{" "}
-            <span className={`${!lightMode ? `text-lime` : `text-gray-600`}`}>
-              {ship && ship.pecio.survivors}
-            </span>
-          </li>
-          <li>
-            <span
-              className={`${
-                !lightMode ? `text-white` : `text-black`
-              } uppercase font-bold`}
-            >
-              Engines:
-            </span>{" "}
-            <span className={`${!lightMode ? `text-lime` : `text-gray-600`}`}>
-              {ship && ship.pecio.engines}
-            </span>
-          </li>
-          <li>
-            <span
-              className={`${
-                !lightMode ? `text-white` : `text-black`
-              } uppercase font-bold`}
-            >
-              Salvage:
-            </span>{" "}
-            <span className={`${!lightMode ? `text-lime` : `text-gray-600`}`}>
-              {ship &&
-                (ship.pecio.salvage.includes("#")
-                  ? `${Chance()
-                      .rpg(ship.pecio.salvage.split("#")[0])
-                      .reduce((a, b) => a + b, 0)} ${
-                      ship.pecio.salvage.split("#")[1]
-                    }`
-                  : ship.pecio.salvage)}
-            </span>
-          </li>
-          <li>
-            <span
-              className={`${
-                !lightMode ? `text-white` : `text-black`
-              } uppercase font-bold`}
-            >
-              Ruination:
-            </span>{" "}
-            <span className={`${!lightMode ? `text-lime` : `text-gray-600`}`}>
-              {ship && ship.pecio.ruination}
-            </span>
-          </li>
-          <li>
-            <span
-              className={`${
-                !lightMode ? `text-white` : `text-black`
-              } uppercase font-bold`}
-            >
-              Weird:
-            </span>{" "}
-            <span className={`${!lightMode ? `text-lime` : `text-gray-600`}`}>
-              {ship && ship.pecio.weird}
-            </span>
-          </li>
-        </ul>
-        <div data-html2canvas-ignore="true" className="w-1/3 p-8">
-          <hr />
-        </div>
-        <div
-          data-html2canvas-ignore="true"
-          onClick={() => {
-            const tirada = Chance().rpg("1d100")[0];
-            const pecio = ShipGenerator(tirada);
-
-            setShip(pecio);
-          }}
-          className={`${
-            !lightMode ? `bg-lime` : `bg-gray-900`
-          } w-1/3 text-center mt-2 cursor-pointer hover:bg-transparent 
-        pointer-events-auto hover:bg-white`}
-        >
+      {hiddeMenu && (
+        <div className="absolute left-8 top-8 select-none pointer-events-none ">
           <p
-            className={`font-radjhani font-bold text-xl ${
-              !lightMode ? `text-black` : `text-white hover:text-black`
-            } mb-2`}
+            className={`text-4xl font-teko font-bold ${
+              !lightMode ? `text-white` : `text-gray-900`
+            } tracking-wide`}
           >
-            Regenerate Spaceship
-          </p>{" "}
-        </div>
-        <div
-          data-html2canvas-ignore="true"
-          onClick={() => {
-            setLightMode();
-          }}
-          className={`${
-            !lightMode ? `bg-lime` : `bg-gray-900`
-          } w-1/3 text-center mt-2 cursor-pointer hover:bg-transparent 
-        pointer-events-auto hover:bg-white`}
-        >
+            > {ship && ship.pecio.name.toUpperCase()}
+          </p>
           <p
-            className={`font-radjhani font-bold text-xl ${
-              !lightMode ? `text-black` : `text-white hover:text-black`
-            } mb-2`}
+            className={` ${
+              !lightMode ? ` text-lime` : `text-gray-700`
+            } text-2xl font-teko font-bold tracking-wider`}
           >
-            {lightMode ? `Dark Mode` : `Light Mode`}
-          </p>{" "}
-        </div>
-        <div
-          data-html2canvas-ignore="true"
-          onClick={() => {
-            setShowGrid();
-          }}
-          className={`${
-            !lightMode ? `bg-lime` : `bg-gray-900`
-          } w-1/3 text-center mt-2 cursor-pointer hover:bg-transparent 
+            {ship && ship.pecio.shipTyp.toUpperCase()}
+          </p>
+          <div
+            data-html2canvas-ignore="true"
+            onClick={() => {
+              setHiddeMenu(!hiddeMenu);
+            }}
+            className={`${
+              !lightMode ? `bg-cyan` : `bg-gray-900`
+            } w-1/3 text-center mt-1 cursor-pointer hover:bg-transparent 
         pointer-events-auto hover:bg-white`}
-        >
-          <p
-            className={`font-radjhani font-bold text-xl ${
-              !lightMode ? `text-black` : `text-white hover:text-black`
-            } mb-2`}
           >
-            {showGrid ? `Hide Grid` : `Show Grid`}
-          </p>{" "}
+            <p
+              className={`font-radjhani font-bold text-sm ${
+                !lightMode ? `text-black` : `text-white hover:text-black`
+              } mb-1`}
+            >
+              Show Menu
+            </p>{" "}
+          </div>
+          <div
+            data-html2canvas-ignore="true"
+            onClick={() => {
+              html2canvas(document.querySelector("#all")).then((canvas) => {
+                const img = canvas.toBlob(
+                  (d) => {
+                    const doc = new jsPDF("l", "px", [
+                      canvas.width / 2,
+                      canvas.height / 2,
+                    ]);
+
+                    doc.addImage(
+                      canvas.toDataURL(),
+                      "PNG",
+                      0,
+                      0,
+                      canvas.width / 2,
+                      canvas.height / 2
+                    );
+
+                    doc.save("derelict.pdf");
+                  },
+                  "image/png",
+                  100
+                );
+              });
+            }}
+            className={`${
+              !lightMode ? `bg-cyan` : `bg-gray-900`
+            } w-1/3 text-center mt-1 cursor-pointer hover:bg-transparent 
+        pointer-events-auto hover:bg-white`}
+          >
+            <p
+              className={`font-radjhani font-bold text-sm ${
+                !lightMode ? `text-black` : `text-white hover:text-black`
+              } mb-1`}
+            >
+              Save
+            </p>{" "}
+          </div>
         </div>
-        <div
-          data-html2canvas-ignore="true"
-          onClick={() => {
-            html2canvas(document.querySelector("#all")).then((canvas) => {
-              const img = canvas.toBlob(
-                (d) => {
-                  const doc = new jsPDF("l", "px", [
-                    canvas.width / 2,
-                    canvas.height / 2,
-                  ]);
+      )}
+      {!hiddeMenu && (
+        <div className="absolute left-8 top-8 select-none pointer-events-none ">
+          <p
+            className={`text-8xl font-teko font-bold ${
+              !lightMode ? `text-white` : `text-gray-900`
+            } tracking-wide`}
+          >
+            > {ship && ship.pecio.name.toUpperCase()}
+          </p>
+          <p
+            className={` ${
+              !lightMode ? ` text-lime` : `text-gray-700`
+            } text-5xl font-teko font-bold tracking-wider`}
+          >
+            {ship && ship.pecio.shipTyp.toUpperCase()}
+          </p>
+          <br />
+          <ul className="text-white text-2xl font-radjhani">
+            <li>
+              <span
+                className={`${
+                  !lightMode ? `text-white` : `text-black`
+                } uppercase font-bold`}
+              >
+                Status:
+              </span>{" "}
+              <span className={`${!lightMode ? `text-lime` : `text-gray-600`}`}>
+                {ship && ship.pecio.status}
+              </span>
+            </li>
+            <li>
+              <span
+                className={`${
+                  !lightMode ? `text-white` : `text-black`
+                } uppercase font-bold`}
+              >
+                Survivors:
+              </span>{" "}
+              <span className={`${!lightMode ? `text-lime` : `text-gray-600`}`}>
+                {ship && ship.pecio.survivors}
+              </span>
+            </li>
+            <li>
+              <span
+                className={`${
+                  !lightMode ? `text-white` : `text-black`
+                } uppercase font-bold`}
+              >
+                Engines:
+              </span>{" "}
+              <span className={`${!lightMode ? `text-lime` : `text-gray-600`}`}>
+                {ship && ship.pecio.engines}
+              </span>
+            </li>
+            <li>
+              <span
+                className={`${
+                  !lightMode ? `text-white` : `text-black`
+                } uppercase font-bold`}
+              >
+                Salvage:
+              </span>{" "}
+              <span className={`${!lightMode ? `text-lime` : `text-gray-600`}`}>
+                {ship &&
+                  (ship.pecio.salvage.includes("#")
+                    ? `${Chance()
+                        .rpg(ship.pecio.salvage.split("#")[0])
+                        .reduce((a, b) => a + b, 0)} ${
+                        ship.pecio.salvage.split("#")[1]
+                      }`
+                    : ship.pecio.salvage)}
+              </span>
+            </li>
+            <li>
+              <span
+                className={`${
+                  !lightMode ? `text-white` : `text-black`
+                } uppercase font-bold`}
+              >
+                Ruination:
+              </span>{" "}
+              <span className={`${!lightMode ? `text-lime` : `text-gray-600`}`}>
+                {ship && ship.pecio.ruination}
+              </span>
+            </li>
+            <li>
+              <span
+                className={`${
+                  !lightMode ? `text-white` : `text-black`
+                } uppercase font-bold`}
+              >
+                Weird:
+              </span>{" "}
+              <span className={`${!lightMode ? `text-lime` : `text-gray-600`}`}>
+                {ship && ship.pecio.weird}
+              </span>
+            </li>
+          </ul>
+          <div data-html2canvas-ignore="true" className="w-1/3 p-8">
+            <hr />
+          </div>
+          <div
+            data-html2canvas-ignore="true"
+            onClick={() => {
+              const tirada = Chance().rpg("1d100")[0];
+              const pecio = ShipGenerator(tirada);
+              setShip(pecio);
+            }}
+            className={`${
+              !lightMode ? `bg-lime` : `bg-gray-900`
+            } w-1/3 text-center mt-2 cursor-pointer hover:bg-transparent 
+        pointer-events-auto hover:bg-white`}
+          >
+            <p
+              className={`font-radjhani font-bold text-xl ${
+                !lightMode ? `text-black` : `text-white hover:text-black`
+              } mb-2`}
+            >
+              Regenerate Spaceship
+            </p>{" "}
+          </div>
+          <div
+            data-html2canvas-ignore="true"
+            onClick={() => {
+              setLightMode();
+            }}
+            className={`${
+              !lightMode ? `bg-lime` : `bg-gray-900`
+            } w-1/3 text-center mt-2 cursor-pointer hover:bg-transparent 
+        pointer-events-auto hover:bg-white`}
+          >
+            <p
+              className={`font-radjhani font-bold text-xl ${
+                !lightMode ? `text-black` : `text-white hover:text-black`
+              } mb-2`}
+            >
+              {lightMode ? `Dark Mode` : `Light Mode`}
+            </p>{" "}
+          </div>
+          <div
+            data-html2canvas-ignore="true"
+            onClick={() => {
+              setShowGrid();
+            }}
+            className={`${
+              !lightMode ? `bg-lime` : `bg-gray-900`
+            } w-1/3 text-center mt-2 cursor-pointer hover:bg-transparent 
+        pointer-events-auto hover:bg-white`}
+          >
+            <p
+              className={`font-radjhani font-bold text-xl ${
+                !lightMode ? `text-black` : `text-white hover:text-black`
+              } mb-2`}
+            >
+              {showGrid ? `Hide Grid` : `Show Grid`}
+            </p>{" "}
+          </div>
+          <div
+            data-html2canvas-ignore="true"
+            onClick={() => {
+              html2canvas(document.querySelector("#all")).then((canvas) => {
+                const img = canvas.toBlob(
+                  (d) => {
+                    const doc = new jsPDF("l", "px", [
+                      canvas.width / 2,
+                      canvas.height / 2,
+                    ]);
 
-                  doc.addImage(
-                    canvas.toDataURL(),
-                    "PNG",
-                    0,
-                    0,
-                    canvas.width / 2,
-                    canvas.height / 2
-                  );
+                    doc.addImage(
+                      canvas.toDataURL(),
+                      "PNG",
+                      0,
+                      0,
+                      canvas.width / 2,
+                      canvas.height / 2
+                    );
 
-                  doc.save("derelict.pdf");
-                },
-                "image/png",
-                100
+                    doc.save("derelict.pdf");
+                  },
+                  "image/png",
+                  100
+                );
+              });
+            }}
+            className={`${
+              !lightMode ? `bg-cyan` : `bg-gray-900`
+            } w-1/3 text-center mt-2 cursor-pointer hover:bg-transparent 
+        pointer-events-auto hover:bg-white`}
+          >
+            <p
+              className={`font-radjhani font-bold text-xl ${
+                !lightMode ? `text-black` : `text-white hover:text-black`
+              } mb-2`}
+            >
+              Save As PDF
+            </p>{" "}
+          </div>
+          <div
+            data-html2canvas-ignore="true"
+            onClick={() => {
+              const t = TEMPLATE(
+                twine,
+                ship.pecio.name.toUpperCase(),
+                ship.ship.children[0].id
               );
-            });
-          }}
-          className={`${
-            !lightMode ? `bg-cyan` : `bg-gray-900`
-          } w-1/3 text-center mt-2 cursor-pointer hover:bg-transparent 
+              var a = document.createElement("a");
+              var file = new Blob([t], { type: "text/html; charset=utf-8" });
+              a.href = URL.createObjectURL(file);
+              var url = window.URL.createObjectURL(file, { oneTimeOnly: true });
+              //window.open(url, '_blank', '');
+              a.href = url;
+              a.target = "_blank";
+
+              a.click();
+              a.download = `${ship.pecio.name
+                .toUpperCase()
+                .replace(" ", "_")}.html`;
+              a.click();
+            }}
+            className={`${
+              !lightMode ? `bg-cyan` : `bg-gray-900`
+            } w-1/3 text-center mt-2 cursor-pointer hover:bg-transparent 
         pointer-events-auto hover:bg-white`}
-        >
-          <p
-            className={`font-radjhani font-bold text-xl ${
-              !lightMode ? `text-black` : `text-white hover:text-black`
-            } mb-2`}
           >
-            Save As PDF
-          </p>{" "}
+            <p
+              className={`font-radjhani font-bold text-xl ${
+                !lightMode ? `text-black` : `text-white hover:text-black`
+              } mb-2`}
+            >
+              Generate TWINE
+            </p>{" "}
+          </div>
+          <div
+            data-html2canvas-ignore="true"
+            onClick={() => {
+              setHiddeMenu(!hiddeMenu);
+            }}
+            className={`${
+              !lightMode ? `bg-cyan` : `bg-gray-900`
+            } w-1/3 text-center mt-2 cursor-pointer hover:bg-transparent 
+        pointer-events-auto hover:bg-white`}
+          >
+            <p
+              className={`font-radjhani font-bold text-xl ${
+                !lightMode ? `text-black` : `text-white hover:text-black`
+              } mb-2`}
+            >
+              Collapse Menu
+            </p>{" "}
+          </div>
         </div>
-        {/* <div
-          data-html2canvas-ignore="true"
-          onClick={() => {
-            const temp = TEMPLATE(twine);
-          }}
-          className={`${
-            !lightMode ? `bg-cyan` : `bg-gray-900`
-          } w-1/3 text-center mt-2 cursor-pointer hover:bg-transparent 
-        pointer-events-auto hover:bg-white`}
-        >
-          <p
-            className={`font-radjhani font-bold text-xl ${
-              !lightMode ? `text-black` : `text-white hover:text-black`
-            } mb-2`}
-          >
-            Generate TWINE story
-          </p>{" "}
-          </div>*/}
-      </div>
-      {/*
-const BaseTwine = `
-<tw-storydata name="Test" startnode="1" creator="Twine" creator-version="2.3.14" ifid="42116112-5974-443D-8B30-D529FFBCD2C6" zoom="1" format="Harlowe" format-version="3.2.2" options="" hidden>
-<style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style>
-<script role="script" id="twine-user-script" type="text/twine-javascript"></script>
-  <tw-passagedata pid="1" name="Computer" tags="" position="489.5,300" size="100,100">[[Hola-&gt;Galley]]</tw-passagedata>
-  <tw-passagedata pid="2" name="Galley" tags="" position="682.5,300" size="100,100">Double-click this passage to edit it.</tw-passagedata>
-</tw-storydata>
-`;
-*/}
+      )}
+
       <div className="absolute left-8 bottom-8 select-none pointer-events-none w-1/2 ">
         <p className="text-3xl font-teko font-bold tracking-wider text-lime">
           {selectedText}

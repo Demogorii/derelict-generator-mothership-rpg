@@ -10,6 +10,10 @@ const useStore = create((set, get) => ({
   showGrid: true,
   showHud: true,
   twine: [],
+  hiddeMenu: false,
+  setHiddeMenu: (menu) => {
+    set({ hiddeMenu: menu });
+  },
   setTwine: (twine) => {
     set((state) => (state.twine = [twine, get().twine]));
   },
@@ -60,6 +64,7 @@ const useStore = create((set, get) => ({
     const s = Object.assign({}, { ship, pecio });
 
     set({ ship: s });
+    set({ twine: [] });
   },
   setView: (view) => set({ view }),
 }));
