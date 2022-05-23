@@ -27,7 +27,7 @@ function App() {
 
   useEffect(() => {
     const tirada = Chance().rpg("1d100")[0];
-    const pecio = ShipGenerator(tirada);
+    const pecio = ShipGenerator(99); // TODO replace
 
     setShip(pecio);
   }, []);

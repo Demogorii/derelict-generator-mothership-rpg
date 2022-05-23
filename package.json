@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.2.0",
+    "@pnp/graph": "^3.3.2",
+    "@pnp/sp": "^3.3.2",
     "@react-three/drei": "^7.1.0",
     "@react-three/fiber": "^7.0.4",
     "@react-three/postprocessing": "^2.0.4-alpha.2",
@@ -22,6 +24,7 @@
     "react-scripts": "4.0.3",
     "three": "^0.130.1",
     "web-vitals": "^1.0.1",
+    "yarn": "^1.22.18",
     "zustand": "^3.5.7"
   },
   "scripts": {
@@ -49,8 +52,8 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^9",
-    "postcss": "^7",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+    "autoprefixer": "^9.8.8",
+    "postcss": "^7.0.39",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
   }
 }
