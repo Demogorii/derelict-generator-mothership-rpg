@@ -37,7 +37,7 @@ function App() {
       if (room.tag === "initial") {
         room.face = [1];
       } else {
-        room.face = Chance().rpg("1d6");
+        room.face = 1;
       }
       room.type = Chance().rpg("1d10");
 
@@ -135,7 +135,7 @@ function App() {
                     rotation={[-Math.PI * 0.5, 0, Math.PI * 0.5]}
                     position={[0, -5, 0]}
                   >
-                    SECTOR-DP{Math.floor(Math.random() * 999)}
+                    LV-124 ORBIT
                   </Text>
                 </>
               )}
