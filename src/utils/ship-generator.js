@@ -691,7 +691,7 @@ export const ShipGenerator = (num) => {
         shipLevels: 2,
       };
       break;
-    case num >= 90:
+    case num === 90:
       ship = {
         id: 30,
         name,
@@ -859,14 +859,12 @@ export const ShipGenerator = (num) => {
     case num === 99:
       ship = {
         id: 39,
-        name,
+        name: `USCSS Colossus`,
         shipTyp: `Colony Ship`,
         status: `Habitable (Functioning)`,
         survivors: `Survivors`,
-        engines: `Unstable Core`,
-        salvage: `Jump Drive & ${Chance()
-          .rpg(`1d10`)
-          .reduce((a, b) => a + b, 0)} Contraband`,
+        engines: `Warp Cooldown...`,
+        salvage: `None`,
         ruination,
         weird,
         shipdices: 20,
